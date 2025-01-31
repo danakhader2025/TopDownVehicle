@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo2y1ca6vw1oo"]
+
+[ext_resource type="Script" path="res://big_rock.gd" id="1_ld467"]
+
+[sub_resource type="PackedScene" id="PackedScene_da0a3"]
+resource_local_to_scene = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_365v0"]
+radius = 5.09902
+
+[node name="CannonBall" type="Area2D"]
+script = ExtResource("1_ld467")
+ExplosionObj = SubResource("PackedScene_da0a3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_365v0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

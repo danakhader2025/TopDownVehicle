@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://2e54pod845d"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_hhd53"]
+[ext_resource type="PackedScene" uid="uid://05dnx22hrk5f" path="res://cannon_ball.tscn" id="2_kxys8"]
+[ext_resource type="Texture2D" uid="uid://djv1r2jsefj18" path="res://Space Theme/PNG/Sprites/Ships/spaceShips_008.png" id="2_ughpy"]
+[ext_resource type="Texture2D" uid="uid://ckpt03bmmfvq5" path="res://Space Theme/PNG/Sprites/Parts/spaceParts_092.png" id="3_gvshd"]
+[ext_resource type="Texture2D" uid="uid://gtd708k7xec3" path="res://Lasers/laserGreen14.png" id="4_6txf1"]
+[ext_resource type="Texture2D" uid="uid://cxgom7lxdn0n3" path="res://Lasers/laserGreen15.png" id="5_rr3qd"]
+[ext_resource type="Texture2D" uid="uid://nll67xo5n7gy" path="res://Lasers/laserGreen16.png" id="6_8e30x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6wxi"]
+radius = 62.0967
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njm74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6txf1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rr3qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8e30x")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"load",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_hhd53")
+CannonBall = ExtResource("2_kxys8")
+
+[node name="CoolDown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="SpaceShips008" type="Sprite2D" parent="."]
+modulate = Color(0.992157, 0.439216, 1, 1)
+rotation = -1.5708
+texture = ExtResource("2_ughpy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 1)
+shape = SubResource("CircleShape2D_w6wxi")
+
+[node name="Cannon" type="Sprite2D" parent="."]
+position = Vector2(38, 0)
+texture = ExtResource("3_gvshd")
+
+[node name="Muzzle" type="Marker2D" parent="Cannon"]
+position = Vector2(-5.79199e-05, -16)
+
+[node name="Fire" type="AnimatedSprite2D" parent="Cannon"]
+position = Vector2(-5.79199e-05, -16)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_njm74")
+animation = &"fire"
+autoplay = "fire"
+
+[connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
+[connection signal="animation_finished" from="Cannon/Fire" to="." method="_on_fire_animation_finished"]

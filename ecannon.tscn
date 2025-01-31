@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0daytqsbo2vm"]
+
+[ext_resource type="Texture2D" uid="uid://d4cmjvga24gtl" path="res://Lasers/laserBlue09.png" id="1_6dfre"]
+[ext_resource type="Script" path="res://ecannon.gd" id="1_wsr73"]
+[ext_resource type="PackedScene" uid="uid://cyqbs8sdwp2rv" path="res://ecannon_ball.tscn" id="2_4dfhy"]
+[ext_resource type="Texture2D" uid="uid://cl3g3cfagfwgj" path="res://Lasers/laserBlue08.png" id="4_5j6c2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b27rr"]
+radius = 23.4307
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upn08"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6dfre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5j6c2")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"load",
+"speed": 5.0
+}]
+
+[node name="Shipcannon" type="Area2D"]
+script = ExtResource("1_wsr73")
+CbObj = ExtResource("2_4dfhy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 0)
+shape = SubResource("CircleShape2D_b27rr")
+
+[node name="Cannon" type="Sprite2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="Muzzle" type="Marker2D" parent="Cannon"]
+
+[node name="Fire" type="AnimatedSprite2D" parent="Cannon/Muzzle"]
+sprite_frames = SubResource("SpriteFrames_upn08")
+animation = &"load"
+autoplay = "load"
+
+[node name="CoolDown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="DetectRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius"]
+
+[node name="InSight" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InSight"]
+position = Vector2(-16.7516, -1.50001)
+scale = Vector2(0.0547889, 0.119629)
+polygon = PackedVector2Array(725.541, 196.441, 725.541, -204.8, 9486.43, -806.661, 10800.6, -4.17953, 9486.43, 731.429)
+
+[connection signal="animation_finished" from="Cannon/Muzzle/Fire" to="." method="_on_fire_animation_finished"]
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]
+[connection signal="body_entered" from="InSight" to="." method="_on_InSight_body_entered"]
+[connection signal="body_entered" from="InSight" to="." method="_on_in_sight_body_entered"]
+[connection signal="body_exited" from="InSight" to="." method="_on_InSight_body_exited"]
+[connection signal="body_exited" from="InSight" to="." method="_on_in_sight_body_exited"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmqm104wj7heg"]
+
+[ext_resource type="Script" path="res://Explosion.gd" id="1_e7p8w"]
+[ext_resource type="Texture2D" uid="uid://ch35m36aj0mra" path="res://Explosion pack (60 assets)/PNG/Sonic explosion/sonicExplosion02.png" id="2_p86s1"]
+[ext_resource type="Texture2D" uid="uid://ca3jgo8bxa4dp" path="res://Explosion pack (60 assets)/PNG/Sonic explosion/sonicExplosion03.png" id="3_ukxgf"]
+[ext_resource type="Texture2D" uid="uid://de3fqahhuchd5" path="res://Explosion pack (60 assets)/PNG/Sonic explosion/sonicExplosion04.png" id="4_mjgwl"]
+[ext_resource type="Texture2D" uid="uid://b72kjwt37e307" path="res://Explosion pack (60 assets)/PNG/Sonic explosion/sonicExplosion06.png" id="5_6hbkd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbaed"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p86s1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ukxgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mjgwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6hbkd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_e7p8w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pbaed")
+autoplay = "default"
+frame = 2
+frame_progress = 0.299957
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://05dnx22hrk5f"]
+
+[ext_resource type="Script" path="res://cannon_ball.gd" id="1_h0myn"]
+[ext_resource type="PackedScene" uid="uid://bmqm104wj7heg" path="res://explosion.tscn" id="2_f5ihb"]
+[ext_resource type="Texture2D" uid="uid://ukdabj5u605t" path="res://Lasers/laserBlue07.png" id="3_y0y1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpmgi"]
+size = Vector2(56, 9)
+
+[node name="CannonBall" type="Area2D"]
+script = ExtResource("1_h0myn")
+ExplosionObj = ExtResource("2_f5ihb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.0104049
+texture = ExtResource("3_y0y1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+rotation = -1.5676
+shape = SubResource("RectangleShape2D_dpmgi")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rotation = 1.5723
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

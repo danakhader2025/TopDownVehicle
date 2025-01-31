@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck8cjun2ykevk"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_bdyeh"]
+[ext_resource type="Texture2D" uid="uid://dnon33lcflrxb" path="res://Space Theme/PNG/Sprites/Ships/spaceShips_006.png" id="2_jp7wm"]
+[ext_resource type="PackedScene" uid="uid://d0daytqsbo2vm" path="res://ecannon.tscn" id="3_62sgt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wv0uf"]
+radius = 19.0
+height = 76.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eanp6"]
+radius = 360.014
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njy5q"]
+size = Vector2(1165, 170)
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_bdyeh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.682353, 0.376471, 0.882353, 1)
+rotation = 1.56865
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_jp7wm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wv0uf")
+
+[node name="DetectRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius"]
+shape = SubResource("CircleShape2D_eanp6")
+
+[node name="InRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InRange"]
+position = Vector2(572.5, -2)
+shape = SubResource("RectangleShape2D_njy5q")
+
+[node name="Shipcannon" parent="." instance=ExtResource("3_62sgt")]
+
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]
+[connection signal="body_entered" from="InRange" to="." method="_on_in_range_body_entered"]
+[connection signal="body_exited" from="InRange" to="." method="_on_in_range_body_exited"]

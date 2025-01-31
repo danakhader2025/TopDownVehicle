@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbqgj6rby7dis"]
+
+[ext_resource type="Script" path="res://start.gd" id="1_52j0p"]
+[ext_resource type="FontFile" uid="uid://c1ksp6msv1460" path="res://Coopers Town.otf" id="2_volvk"]
+[ext_resource type="FontFile" uid="uid://divv1xcy5i5d2" path="res://Coopers Town.ttf" id="3_j8hs8"]
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_52j0p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.72, 16.2)
+color = Color(0.988235, 0.784314, 0.901961, 1)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 379.0
+offset_right = 7543.0
+offset_bottom = 1981.0
+scale = Vector2(0.0496514, 0.058298)
+theme_override_colors/font_color = Color(0.478431, 0.435294, 0.909804, 1)
+theme_override_colors/icon_normal_color = Color(0.419608, 0.741176, 0.901961, 1)
+theme_override_colors/icon_disabled_color = Color(0.501961, 0.780392, 0.866667, 1)
+theme_override_fonts/font = ExtResource("2_volvk")
+theme_override_font_sizes/font_size = 1500
+text = "~BEGIN~"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 97.0
+offset_top = 203.0
+offset_right = 1052.0
+offset_bottom = 286.0
+theme_override_colors/font_color = Color(0.862745, 0.580392, 0.827451, 1)
+theme_override_colors/font_shadow_color = Color(0.254902, 0.247059, 0.592157, 1)
+theme_override_colors/font_outline_color = Color(0.705882, 0.294118, 0.705882, 1)
+theme_override_fonts/font = ExtResource("3_j8hs8")
+theme_override_font_sizes/font_size = 75
+text = "Stellar Dreamscape"
